@@ -53,6 +53,7 @@ const Agent = ({userName}:AgentProps) => {
                 <p key={lastMessage} className={cn('transition-opacity duration-500 opacity-0','animate-fadeIn opacity-100')}>
                      {lastMessage}
                      {/* p tag k andr jo class hai na wahi help kr rha jab v ye last message update ho rha na tb animate ye sb usi ki functionality hai */}
+                     
                 </p>
             </div>
 
