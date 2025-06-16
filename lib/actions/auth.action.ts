@@ -130,3 +130,10 @@ export async function isAuthenticated() {
     return !!user;   // !false=true  again !true=false only..
     
 }
+export async function signOut() {
+  const cookieStore = cookies();
+  (await cookieStore).set('session', '', {
+    maxAge: 0,
+    path: '/',
+  });
+}
