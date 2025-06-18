@@ -48,7 +48,7 @@ const page = async () => {
      <Image src="/robot2.png" alt="robo-dude" height={400} width={400} className=" max-sm:hidden" />
    </section>
    <section className="flex flex-col gap-6 mt-8">
-       <h2>Your Interviews</h2>
+       <h2>Your Interview Is Ready – Take It to Help Us Improve</h2>
        <div className='interviews-section'>
          {/* <p>You Haven&apos;t taken Any Interviews Yet</p> */}
           {/* <p>There are No interview Availaible</p> */}
@@ -64,7 +64,7 @@ const page = async () => {
        </div>
    </section>
    <section className='flex flex-col gap-6 mt-8'>
-       <h2>Take an Interview</h2>
+       <h2>This Is a Preview of an Interview Created by Others – Feedback Is Non-Official</h2>
        <div className='interviews-section'>
          {
         hasUpcomingInterviews?(LatestInterview?.map((interview)=>(
