@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { vapi } from "@/lib/vapi.sdk";
+import { interviewer } from "@/constants";
 enum CallStatus {
   INACTIVE = "INACTIVE",
   CONNECTING = "CONNECTING",
@@ -70,11 +71,42 @@ const Agent = ({
       vapi.off("error", onError);
     };
   }, []);
+
+  const handleGenerateFeedback=async (messages:SavedMessage[])=>{
+    //it has taken parameter of entire transcript...jo v conversation hua hai..usi k basis pe feedback ayega na ji
+    console.log('Generate feedback here');
+    //after that we can destructure the sucess and the ID  from the action where we'll actually generate that feedback but for now i'll mock it by
+    //by creating a fake sucess of true 
+    const {success,id}={
+        success:true,
+        id:'feedback-id'
+    }
+    if(success && id)
+    {
+        router.push(`/interview/${interviewId}/feedback`);
+    }
+    else{
+        console.log('Error saving feedback');
+        router.push('/');//will go back to the home page....
+    }
+  }
   useEffect(() => {
-    if (callStatus === CallStatus.FINISHED) {
-      //if it is fnished push to the home page...the reason we are not redirecting to the
-      // interview->id because it would take some time to generate the interview so its best to move on the home page first and manually find it on the home page
-      router.push("/");
+    // if (callStatus === CallStatus.FINISHED) {
+    //   //if it is fnished push to the home page...the reason we are not redirecting to the
+    //   // interview->id because it would take some time to generate the interview so its best to move on the home page first and manually find it on the home page
+    //   router.push("/");
+    // }
+    if(callStatus===CallStatus.FINISHED)
+    {
+        if(type==='generate')
+        {
+            //tab to home pe hi chal ja
+            router.push('/');
+        }
+        else{
+            //mtlb hmane actual interview liya hai so now we have to generate feedback right
+            handleGenerateFeedback(messages);
+        }
     }
   }, [messages, callStatus, type, userId]);
 
@@ -110,6 +142,25 @@ const Agent = ({
           },
         }
       );
+    }
+    else {
+        //if we are taking interview..then we will provide array of questions to interviewer to ask
+
+      let formattedQuestions = "";
+      //if questions exists then 
+      if (questions) {
+
+        //we will take questions individually in a like bullet point form and we wee will join them by new line character 
+        formattedQuestions = questions
+          .map((question) => `- ${question}`)
+          .join("\n");
+      }
+      //on basis of this formatted question  we can start vapi call
+      await vapi.start(interviewer, {
+        variableValues: {
+          questions: formattedQuestions,
+        },
+      });
     }
   };
 
