@@ -1,6 +1,7 @@
 //firstly we want to create action for signUp
 'use server'
 
+import { interviewCovers } from "@/constants";
 import { auth, db } from "@/firebase/admin";
 import { cookies } from "next/headers";
 import { _success } from "zod/v4/core";
@@ -136,4 +137,35 @@ export async function signOut() {
     maxAge: 0,
     path: '/',
   });
+}
+
+export async function getInterviewsByUserId(userId:string):Promise<Interview[]| null>
+{
+    //try to fetch all the interview...khud soch na jo current user hai usse match krke lena hai
+    //to current user jo cookie me save hoga usse aa jiga
+    //and then we can fetch all the interview of it..and note...interview 1 hi thodi rhega..aur rhenge na...isliye array type ka hai...see in docs ache se smjha rkha hai
+    const interviews=db.collection('interviews').where('userId','==',userId).orderBy('createdAt','desc').get();//iska mtlb hai ki db me interviews nam ka collection hai usme jiska userId==cureent ka useriD se match ho rha hai usse fetch kro and createdAt time se decs order me sort krke get() kro
+    //once we get the interview we can return it each interview by map
+    console.log(interviews);
+    return (await interviews).docs.map((doc)=>({
+        id:doc.id,
+        ...doc.data()
+    })) as Interview[];
+}
+
+export async function getLatestInterviews(params:GetLatestInterviewsParams):Promise<Interview[]| null>
+{
+    //upr me jo params hai n usme userid and limit v hai ki ek bar me kitna dikahna hai single page..thodi sab dikha denge
+    const {userId,limit=20}=params;
+
+    //try to fetch all the interview...khud soch na jo current user hai usse match krke lena hai
+    //to current user jo cookie me save hoga usse aa jiga
+    //and then we can fetch all the interview of it..and note...interview 1 hi thodi rhega..aur rhenge na...isliye array type ka hai...see in docs ache se smjha rkha hai
+    const interviews=db.collection('interviews').orderBy('createdAt','desc').where('finalized','==',true).where('userId','!=',userId).limit(limit).get();//iska mtlb hai ki db me interviews nam ka collection hai usme jiska userId==cureent ka useriD se match ho rha hai usse fetch kro and createdAt time se decs order me sort krke get() kro
+    //once we get the interview we can return it each interview by map
+  //  console.log(interviews);
+    return (await interviews).docs.map((doc)=>({
+        id:doc.id,
+        ...doc.data()
+    })) as Interview[];
 }

@@ -11,7 +11,7 @@ export async function GET() {
 export async function POST(request: Request) {
   //so now we kinda ssume ki which data we need to pass to gemini
   //so wee need to pass type of interview...level of interview ,role techstack etc and amount of question and also userid
-  const { type, role, level, techstack, amount, userid } = await request.json(); //the way you can take all the value from request is request.json
+  const { type, role, level, techstack, amount, userid  } = await request.json(); //the way you can take all the value from request is request.json
   try {
     //here we will generate AI text by givng prompt to gemini using api key 
     //which will then genrate question on basis of this
