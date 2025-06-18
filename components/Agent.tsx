@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { vapi } from "@/lib/vapi.sdk";
 import { interviewer } from "@/constants";
+import { createFeedback } from "@/lib/actions/general.action";
 enum CallStatus {
   INACTIVE = "INACTIVE",
   CONNECTING = "CONNECTING",
@@ -77,10 +78,13 @@ const Agent = ({
     console.log('Generate feedback here');
     //after that we can destructure the sucess and the ID  from the action where we'll actually generate that feedback but for now i'll mock it by
     //by creating a fake sucess of true 
-    const {success,id}={
-        success:true,
-        id:'feedback-id'
-    }
+
+    const {success,feedbackId:id}=await createFeedback({
+       interviewId:interviewId!,
+       userId:userId!,
+       transcript:messages
+    })
+
     if(success && id)
     {
         router.push(`/interview/${interviewId}/feedback`);
@@ -88,6 +92,7 @@ const Agent = ({
     else{
         console.log('Error saving feedback');
         router.push('/');//will go back to the home page....
+        
     }
   }
   useEffect(() => {

@@ -5,8 +5,11 @@ import Image from 'next/image';
 import { Button } from './ui/button';
 import Link from 'next/link';
 import DisplayTechIcons from './DisplayTechIcons';
-const InterviewCard = ({id,userId,role,type,techstack,createdAt}:InterviewCardProps) => {
-    const feedback= null as Feedback | null;
+import { getFeedbackByInterviewId } from '@/lib/actions/general.action';
+//import { getFeedbackByInterviewId } from '@/lib/actions/general.action';
+const InterviewCard = async ({id,userId,role,type,techstack,createdAt}:InterviewCardProps) => {
+    //const feedback= null as Feedback | null;
+    const feedback= userId && id ?await getFeedbackByInterviewId({interviewId:id,userId}):null;
     const normalizedType= /mix/gi.test(type)?"Mixed":type;
 
     // ye formatteddate me na jo v hai vo feedback kab create hua...agr ye nhi hua to usko createdat se le aoo..agr vo v nhi hai to dat.now jo v hai usse replace kr lo
