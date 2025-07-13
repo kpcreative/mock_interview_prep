@@ -75,7 +75,7 @@ const Agent = ({
 
   const handleGenerateFeedback=async (messages:SavedMessage[])=>{
     //it has taken parameter of entire transcript...jo v conversation hua hai..usi k basis pe feedback ayega na ji
-    console.log('Generate feedback here');
+    //console.log('Generate feedback here');
     //after that we can destructure the sucess and the ID  from the action where we'll actually generate that feedback but for now i'll mock it by
     //by creating a fake sucess of true 
 

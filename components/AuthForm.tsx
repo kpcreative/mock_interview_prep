@@ -127,7 +127,7 @@ const AuthForm = ({type}:{type:FormType}) => {
           <Button className="btn" type="submit">{isSignIn ? "Sign In" : "Create an Account"}</Button>
         </form>
       </Form>
-      <p className="text-center">
+      <p className="text-center text-white">
         {isSignIn ? "Don't have an account?" : "Already have an account?"}
         <Link href={!isSignIn ? "/sign-in" : "/sign-up"} className="font-bold text-user-primary ml-1">
           {!isSignIn ? "Sign In" : "Sign Up"}

@@ -13,13 +13,13 @@ export default function LogoutButton() {
     <form action={signOut}>
       {/* Full button on md+, icon-only on sm */}
       <Button
-        className="btn flex items-center gap-2 px-4 py-2"
+        className="bg-blue-600 hover:bg-blue-700 text-white flex items-center gap-2 px-4 py-2 rounded-full font-bold min-h-10"
         type="submit"
       >
         {/* Show icon always */}
         <LogOut size={18} />
         {/* Hide text on small screens */}
-        <span className="hidden sm:inline font-bold text-user-primary ml-1">Logout</span>
+        <span className="hidden sm:inline font-bold ml-1">Logout</span>
       </Button>
     </form>
   );

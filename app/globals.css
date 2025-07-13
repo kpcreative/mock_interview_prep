@@ -29,13 +29,13 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
+  --background: #fff(1 0 0);
+  --foreground: #000(0.145 0 0);
+  --card: #fff(1 0 0);
+  --card-foreground: #000(0.145 0 0);
+  --popover: #fff(1 0 0);
+  --popover-foreground: #000(0.145 0 0);
+  --primary: #fff(0.205 0 0);
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
@@ -142,7 +142,7 @@
     @apply bg-background text-foreground;
   }
   p {
-    @apply text-light-100;
+     @apply text-black;
   }
   h2 {
     @apply text-3xl font-semibold;
@@ -154,7 +154,7 @@
     @apply list-disc list-inside;
   }
   li {
-    @apply text-light-100;
+   @apply text-black;
   }
 }
 
@@ -174,12 +174,18 @@
   .btn-upload {
     @apply flex min-h-14 w-full items-center justify-center gap-1.5 rounded-md;
   }
-  .btn-primary {
-    @apply w-fit !bg-primary-200 !text-dark-100 hover:!bg-primary-200/80 !rounded-full !font-bold px-5 cursor-pointer min-h-10;
-  }
+.btn-primary {
+  @apply w-fit bg-blue-700 text-white hover:bg-blue-800 rounded-full font-bold px-5 cursor-pointer min-h-10;
+  @apply dark:bg-blue-500 dark:hover:bg-blue-600;
+
+  @apply disabled:bg-gray-200 disabled:text-gray-500 disabled:cursor-not-allowed disabled:border disabled:border-gray-300;
+  @apply disabled:px-5 disabled:py-2.5;
+}
+
+
+
   .btn-secondary {
-    @apply w-fit !bg-dark-200 !text-primary-200 hover:!bg-dark-200/80 !rounded-full !font-bold px-5 cursor-pointer min-h-10;
-  }
+ @apply w-fit bg-gray-200 text-black hover:bg-gray-300 rounded-full font-bold px-5 cursor-pointer min-h-10;  }
 
   .btn-upload {
     @apply bg-dark-200 rounded-full min-h-12 px-5 cursor-pointer border border-input  overflow-hidden;
@@ -189,9 +195,10 @@
     @apply border-gradient p-0.5 rounded-2xl w-fit;
   }
 
-  .card {
-    @apply dark-gradient rounded-2xl min-h-full;
-  }
+ .card {
+  @apply bg-[#1e1e1e] text-white rounded-2xl min-h-full;
+}
+
 
   .form {
     @apply w-full;
@@ -200,9 +207,10 @@
       @apply !text-light-100 !font-normal;
     }
 
-    .input {
-      @apply !bg-dark-200 !rounded-full !min-h-12 !px-5 placeholder:!text-light-100;
-    }
+  .input {
+  @apply !bg-[#2d2d2d] !text-white !rounded-full !min-h-12 !px-5 placeholder:!text-light-100;
+}
+
 
     .btn {
       @apply !w-full !bg-primary-200 !text-dark-100 hover:!bg-primary-200/80 !rounded-full !min-h-10 !font-bold !px-5 cursor-pointer;
@@ -265,9 +273,9 @@
     @apply flex mx-auto max-w-7xl flex-col gap-12 my-12 px-16 max-sm:px-4 max-sm:my-8;
   }
 
-  .card-cta {
-    @apply flex flex-row blue-gradient-dark rounded-3xl px-16 py-6 items-center justify-between max-sm:px-4;
-  }
+ .card-cta {
+  @apply flex flex-row bg-white text-black rounded-3xl px-16 py-6 items-center justify-between max-sm:px-4;
+}
 
   .interviews-section {
     @apply flex flex-wrap gap-4 max-lg:flex-col w-full items-stretch;
@@ -285,13 +293,17 @@
     @apply absolute bottom-full mb-1 hidden group-hover:flex px-2 py-1 text-xs text-white bg-gray-700 rounded-md shadow-md;
   }
 
-  .card-interview {
-    @apply dark-gradient rounded-2xl min-h-full flex flex-col p-6 relative overflow-hidden gap-10 justify-between;
+.card-interview {
+  @apply rounded-2xl min-h-full flex flex-col p-6 relative overflow-hidden gap-10 justify-between;
 
-    .badge-text {
-      @apply text-sm font-semibold capitalize;
-    }
+  @apply bg-white text-black;        /* Light theme base */
+  @apply dark:bg-gradient-to-b dark:from-[#1A1C20] dark:to-[#08090D] dark:text-white; /* Dark theme override */
+
+  .badge-text {
+    @apply text-sm font-semibold capitalize;
   }
+}
+
 }
 
 @utility dark-gradient {
@@ -331,4 +343,8 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+section {
+  background-color: #fff !important;
+  color: #000 !important;
 }

@@ -86,6 +86,46 @@ export async function setSessionCookie(idToken :string)
     const sessionCookie= await auth.createSessionCookie(idToken,{
         expiresIn:ONE_WEEK*1000,
     })
+//     🔐 1. httpOnly: true – XSS Attack se Protection
+// 📖 What it means:
+// Iska matlab: JavaScript se cookie ko access nahi kar sakte.
+
+// Agar koi page me malicious JS aa gaya (XSS attack), toh wo document.cookie se token uthaa nahi sakta.
+
+// 🛡 Why it matters:
+// XSS (Cross-Site Scripting) attacks attempt to steal cookies.
+
+// But httpOnly cookies are invisible to JS, only server can read them.
+
+// ✅ In interview bolo:
+// "We set httpOnly: true to protect session cookies from XSS attacks, making them inaccessible to client-side JavaScript."
+
+// 🔐 2. secure: process.env.NODE_ENV === 'production' – HTTPS only
+// 📖 What it means:
+// Ye cookie sirf HTTPS connection pe set hoga.
+
+// Agar tum http pe ho (like localhost in dev), toh ye cookie nahi set hota.
+
+// 🛡 Why it matters:
+// Without HTTPS, cookie can be intercepted over network (Man-in-the-Middle attack).
+
+// Secure flag ensures data travels encrypted.
+
+// ✅ In interview bolo:
+// "We use secure: true in production to ensure cookies are only sent over HTTPS, protecting them from network-level attacks like sniffing or MITM."
+
+// 🔐 3. path: '/' – Cookie ka scope define karta hai
+// 📖 What it means:
+// path: '/' ka matlab hai cookie poori site pe accessible hoga.
+
+// Agar tum path /dashboard karte, toh sirf dashboard pages mein milta.
+
+// 🛡 Why it matters:
+// It gives you control: kab aur kaunse routes par cookie send hoga.
+
+// But '/' is safe default when you want global access.
+
+
 
     cookieStore.set('session',sessionCookie,{
         maxAge:ONE_WEEK,

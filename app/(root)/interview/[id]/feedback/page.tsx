@@ -1,34 +1,36 @@
-import { getCurrentUser } from '@/lib/actions/auth.action';
-import {  getFeedbackByInterviewId, getInterviewById } from '@/lib/actions/general.action';
-import { redirect } from 'next/navigation';
-import React from 'react'
+import { getCurrentUser } from "@/lib/actions/auth.action";
+import {
+  getFeedbackByInterviewId,
+  getInterviewById,
+} from "@/lib/actions/general.action";
+import { redirect } from "next/navigation";
+import React from "react";
 import dayjs from "dayjs";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
-const Feedback = async ({params}:RouteParams) => {
-    const {id}=await params;//isse to interview ka id niklega na..kyuki url hai interview-->[id]..i.e interviewId
-    //we will also fetch userId kyuki feedback fectch krne k liye ye v chahiye..ye cookie se utha lenge
-    const user=await getCurrentUser();
-    //also we need to get the interview details..jo ki ye hai
-    const interview=await getInterviewById(id);
-  
-    //if no any interview go to the home page...
+const Feedback = async ({ params }: RouteParams) => {
+  const { id } = await params; //isse to interview ka id niklega na..kyuki url hai interview-->[id]..i.e interviewId
+  //we will also fetch userId kyuki feedback fectch krne k liye ye v chahiye..ye cookie se utha lenge
+  const user = await getCurrentUser();
+  //also we need to get the interview details..jo ki ye hai
+  const interview = await getInterviewById(id);
 
-    if(!interview) redirect('/');
-    
-    //but if there is interview we are gonna provide feedback
-    const feedback=await getFeedbackByInterviewId({
-        interviewId:id,
-        userId:user?.id!,
+  //if no any interview go to the home page...
 
-    })
+  if (!interview) redirect("/");
+
+  //but if there is interview we are gonna provide feedback
+  const feedback = await getFeedbackByInterviewId({
+    interviewId: id,
+    userId: user?.id!,
+  });
   // console.log(feedback);//you can see kisa dikhta hai tera feedback
   return (
     // yha se just copy pasted the ui
-  //  
- <section className="section-feedback">
+    //
+    <section className="section-feedback">
       <div className="flex flex-row justify-center">
         <h1 className="text-4xl font-semibold">
           Feedback on the Interview -{" "}
@@ -98,22 +100,22 @@ const Feedback = async ({params}:RouteParams) => {
       </div>
 
       <div className="buttons">
-        <Button className="btn-secondary flex-1">
+        <Button className="bg-gray-800 hover:bg-gray-900 text-white flex-1 rounded-full font-bold">
           <Link href="/" className="flex w-full justify-center">
-            <p className="text-sm font-semibold text-primary-200 text-center">
+            <span className="text-sm font-semibold text-white text-center">
               Back to dashboard
-            </p>
+            </span>
           </Link>
         </Button>
 
-        <Button className="btn-primary flex-1">
+        <Button className="bg-white hover:bg-gray-100 text-black flex-1 rounded-full font-bold border border-gray-300 shadow">
           <Link
             href={`/interview/${id}`}
             className="flex w-full justify-center"
           >
-            <p className="text-sm font-semibold text-black text-center">
+            <span className="text-sm font-semibold text-black text-center">
               Retake Interview
-            </p>
+            </span>
           </Link>
         </Button>
       </div>
@@ -121,5 +123,4 @@ const Feedback = async ({params}:RouteParams) => {
   );
 };
 
-
-export default Feedback
+export default Feedback;
