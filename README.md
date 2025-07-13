@@ -77,10 +77,13 @@ npm run dev
 Now, open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## 🖼️ UI Sneak Peek (Optional)  
-<img width="1440" alt="Screenshot 2025-06-19 at 1 40 24 AM" src="https://github.com/user-attachments/assets/f2cc1500-37cf-41e9-9c33-b60024f24c43" />
-<img width="1440" alt="Screenshot 2025-06-19 at 1 40 32 AM" src="https://github.com/user-attachments/assets/a0dae6aa-abd7-4b45-8c26-530c22ba0ccd" />
-<img width="1440" alt="Screenshot 2025-06-19 at 1 40 48 AM" src="https://github.com/user-attachments/assets/d0aeb038-5352-439f-ba1c-656f51ac5a0b" />
-<img width="1440" alt="Screenshot 2025-06-19 at 1 40 57 AM" src="https://github.com/user-attachments/assets/d0bd56ab-81b4-453a-9a51-6bc94c5cbaf0" />
+<img width="1375" height="481" alt="Screenshot 2025-07-13 at 11 10 03 AM" src="https://github.com/user-attachments/assets/d2bd6abe-cdef-4fe8-b1ce-9736d2a27bf1" />
+<img width="1293" height="796" alt="Screenshot 2025-07-13 at 11 10 29 AM" src="https://github.com/user-attachments/assets/277b94c8-2776-4cd7-b95a-473f5feb4797" />
+<img width="1350" height="788" alt="Screenshot 2025-07-13 at 11 10 49 AM" src="https://github.com/user-attachments/assets/6c4cace1-2c42-4e54-8539-e2fc8c957c91" />
+<img width="1343" height="739" alt="Screenshot 2025-07-13 at 11 11 21 AM" src="https://github.com/user-attachments/assets/88151d5f-ca20-4aa3-92be-ba282f6f4c03" />
+
+
+
 
 
 
